@@ -2,6 +2,7 @@ import "./Filter.css";
 
 const Filter = ({ filters, setFilters }) => (
   <div className="pet-filter-container">
+    {/* favourite */}
     <div className="filter-container">
       <label htmlFor="favourite">Favourite</label>
       <select
@@ -20,6 +21,8 @@ const Filter = ({ filters, setFilters }) => (
         <option value="not favoured">Not Favoured</option>
       </select>
     </div>
+    
+    {/* gender */}
     <div className="filter-container">
       <label htmlFor="gender">Gender</label>
       <select
