@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Sydney",
+    "name": "One",
     "phone": "333-333-3333",
     "email": "laith@hotmail.com",
     "image": {
@@ -14,7 +14,7 @@
   },
   {
     "id": 2,
-    "name": "Ja",
+    "name": "Two",
     "phone": "333-333-3333",
     "email": "laith@hotmail.com",
     "image": {
@@ -27,7 +27,7 @@
   },
   {
     "id": 3,
-    "name": "Holly",
+    "name": "Three",
     "phone": "333-333-3333",
     "email": "laith@hotmail.com",
     "image": {
@@ -40,7 +40,7 @@
   },
   {
     "id": 4,
-    "name": "Kevin",
+    "name": "Four",
     "phone": "333-333-3333",
     "email": "laith@hotmail.com",
     "image": {
@@ -53,7 +53,7 @@
   },
   {
     "id": 5,
-    "name": "Rachel",
+    "name": "Five",
     "phone": "333-333-3333",
     "email": "laith@hotmail.com",
     "image": {
