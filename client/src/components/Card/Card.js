@@ -4,6 +4,7 @@ import heartOutlined from "../../svgs/heartOutlined.svg";
 import { PetsContext } from "../Pets/Pets";
 import "./Card.css";
 
+
 const Card = ({ name, phone, email, image, favoured, index }) => {
   const { cats, setCats } = useContext(PetsContext);
   const [isFavoured, setIsFavoured] = useState(favoured);
