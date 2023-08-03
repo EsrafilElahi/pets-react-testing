@@ -6,6 +6,7 @@ const app = express();
 
 app.use(cors());
 
+
 app.get("/cats", async (req, res) => {
   return res.json(cats);
 });
