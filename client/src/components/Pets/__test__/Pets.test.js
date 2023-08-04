@@ -92,6 +92,7 @@ describe("Pets", () => {
 
         // assertion
         expect(afterCats).not.toStrictEqual([beforeCats[1], beforeCats[4]]);
+        expect(afterCats).not.toStrictEqual([beforeCats]);
         expect(afterCats).toStrictEqual([beforeCats[0], beforeCats[2], beforeCats[3]]);
       });    
     })
