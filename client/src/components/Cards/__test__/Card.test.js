@@ -3,6 +3,7 @@ import Cards from '../Cards';
 import cats from '../../../mocks/cats.json';
 import { PetsContext } from '../../Pets/Pets';
 
+const mockedSetCats = jest.fn();
 
 describe("Cards", () => {
   test("render 5 cards in page", () => {
@@ -11,7 +12,8 @@ describe("Cards", () => {
       <PetsContext.Provider
         value={{
           cats: cats,
-          setCats: () => { },
+          // setCats: () => { }, // this is ok too
+          setCats: mockedSetCats,
         }}
       >
         <Cards />
