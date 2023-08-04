@@ -1,4 +1,4 @@
-import {screen, render} from '@testing-library/react';
+import {screen, render, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Pets from '../Pets';
 import { rest } from 'msw';
@@ -28,82 +28,107 @@ describe("Pets", () => {
 
     // assertion
     expect(cats).toHaveLength(5)
-    
+
   });
 
-  describe("male filter", () => {
-    test('compare before after select male option', async () => {
-      // before
-      const beforeCards = await screen.findAllByRole("article");
-      
-      // select male
-      const genderOptions = screen.getByLabelText(/gender/i);
-      userEvent.selectOptions(genderOptions, "male");
+  describe("favour filter", () => {
+    describe('favour filter', () => { 
+      test('compare cats after select favoured', async () => {
+        // before
+        const beforeCats = await screen.findAllByRole("article");
 
-      // after
-      const afterCards = await screen.findAllByRole("article");
+        // click favour card
+        const favourBtn1 = within(beforeCats[0]).getByRole("button");
+        const favourBtn2 = within(beforeCats[1]).getByRole("button");
+        userEvent.click(favourBtn1);
+        userEvent.click(favourBtn2);
 
-      // assertions
-      expect(afterCards.length).toBeGreaterThan(0); // Ensure there are some male cats
-      expect(afterCards.length).toBeLessThanOrEqual(beforeCards.length); // Filtered count <= Total count
+        // after
+        const afterCats = await screen.findAllByRole("article"); 
 
-      afterCards.forEach(card => {
-        expect(card).toHaveTextContent(/male/i)
+        // assertion
+        expect(beforeCats).not.toStrictEqual(afterCats);
       })
+    })
+  });
 
+  describe('gender filter', () => {
+    describe("male filter", () => {
+      test('compare before after select male option', async () => {
+        // before
+        const beforeCards = await screen.findAllByRole("article");
+
+        // select male
+        const genderOptions = screen.getByLabelText(/gender/i);
+        userEvent.selectOptions(genderOptions, "male");
+
+        // after
+        const afterCards = await screen.findAllByRole("article");
+
+        // assertions
+        expect(afterCards.length).toBeGreaterThan(0); // Ensure there are some male cats
+        expect(afterCards.length).toBeLessThanOrEqual(beforeCards.length); // Filtered count <= Total count
+
+        afterCards.forEach(card => {
+          expect(card).toHaveTextContent(/male/i)
+        })
+
+      });
+      test("display male cards in page", async () => {
+        // before
+        const beforeCards = await screen.findAllByRole("article");
+
+        // select male
+        const genderOptions = screen.getByLabelText(/gender/i);
+        userEvent.selectOptions(genderOptions, "male");
+
+        // after
+        const afterCards = screen.getAllByRole("article");
+
+        // assertion
+        expect(afterCards).toStrictEqual([beforeCards[1], beforeCards[3]])
+
+      })
     });
-    test("display male cards in page", async () => {
-      // before
-      const beforeCards = await screen.findAllByRole("article");
 
-      // select male
-      const genderOptions = screen.getByLabelText(/gender/i);
-      userEvent.selectOptions(genderOptions, "male");
+    describe('female filter', () => {
+      test("compare before after select female option", async () => {
+        // before
+        const beforeCards = await screen.findAllByRole("article");
 
-      // after
-      const afterCards = screen.getAllByRole("article");
+        // select female
+        const genderOptions = screen.getByLabelText(/gender/i);
+        userEvent.selectOptions(genderOptions, "female");
 
-      // assertion
-      expect(afterCards).toStrictEqual([beforeCards[1], beforeCards[3]])
+        // after
+        const afterCards = await screen.findAllByRole("article");
+
+        // assertions
+        expect(afterCards.length).toBeGreaterThan(0); // Ensure there are some male cats
+        expect(afterCards.length).toBeLessThanOrEqual(beforeCards.length); // Filtered count <= Total count
+
+        afterCards.forEach(card => {
+          expect(card).toHaveTextContent(/female/i)
+        })
+      });
+      test("display female cards in page", async () => {
+        // before
+        const beforeCards = await screen.findAllByRole("article");
+
+        // select female
+        const genderOptions = screen.getByLabelText(/gender/i);
+        userEvent.selectOptions(genderOptions, "female");
+
+        // after
+        const afterCards = await screen.findAllByRole("article");
+
+        // assertion
+        expect(afterCards).toStrictEqual([beforeCards[0], beforeCards[2], beforeCards[4]]);
+      })
 
     })
   });
 
-  describe('female filter', () => {
-    test("compare before after select female option", async () => {
-      // before
-      const beforeCards = await screen.findAllByRole("article");
 
-      // select female
-      const genderOptions = screen.getByLabelText(/gender/i);
-      userEvent.selectOptions(genderOptions, "female");
-
-      // after
-      const afterCards = await screen.findAllByRole("article");
-
-      // assertions
-      expect(afterCards.length).toBeGreaterThan(0); // Ensure there are some male cats
-      expect(afterCards.length).toBeLessThanOrEqual(beforeCards.length); // Filtered count <= Total count
-
-      afterCards.forEach(card => {
-        expect(card).toHaveTextContent(/female/i)
-      })
-    });
-    test("display female cards in page", async () => {
-      // before
-      const beforeCards = await screen.findAllByRole("article");
-
-      // select female
-      const genderOptions = screen.getByLabelText(/gender/i);
-      userEvent.selectOptions(genderOptions, "female");
-
-      // after
-      const afterCards = await screen.findAllByRole("article");
-
-      // assertion
-      expect(afterCards).toStrictEqual([beforeCards[0], beforeCards[2], beforeCards[4]]);
-    })
-
-  })
 
 })
