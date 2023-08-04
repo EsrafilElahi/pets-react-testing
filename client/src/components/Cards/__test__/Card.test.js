@@ -17,7 +17,6 @@ describe("Cards", () => {
         <Cards />
       </PetsContext.Provider>
     );
-
     // assertion
     const cards = screen.getAllByRole("article");
     expect(cards).toHaveLength(5)
