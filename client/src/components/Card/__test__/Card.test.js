@@ -59,7 +59,7 @@ describe('Card', () => {
       const imgElement = screen.getByAltText(/cute cat/i);
       expect(imgElement.src).toBe(cardProps.image.url);
     });
-  })
+  });
 
   describe('like, dislike status', () => {
 
@@ -108,6 +108,6 @@ describe('Card', () => {
       expect(filledHeart2).not.toBeInTheDocument();
     })
 
-  })
+  });
 
 })
