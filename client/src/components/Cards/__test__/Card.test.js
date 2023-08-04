@@ -1,9 +1,12 @@
-import { screen, render } from '@testing-library/react';
+import { screen, render, cleanup } from '@testing-library/react';
 import Cards from '../Cards';
 import cats from '../../../mocks/cats.json';
 import { PetsContext } from '../../Pets/Pets';
 
 const mockedSetCats = jest.fn();
+
+afterEach(cleanup)
+
 
 describe("Cards", () => {
   test("render 5 cards in page", () => {

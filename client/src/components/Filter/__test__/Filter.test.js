@@ -1,7 +1,9 @@
-import { screen, render } from '@testing-library/react';
+import { screen, render, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Filters from '../Filter';
 
+
+afterEach(cleanup)
 
 describe("Filter", () => {
   // render

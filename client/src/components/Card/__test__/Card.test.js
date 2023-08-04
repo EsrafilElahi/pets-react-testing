@@ -1,4 +1,4 @@
-import { screen, render, getByRole } from '@testing-library/react';
+import { screen, render, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Card from '../Card';
 import cats from '../../../mocks/cats.json';
@@ -30,6 +30,8 @@ const renderCardComponentWithProvider = (props) => {
     </PetsContext.Provider>
   );
 };
+
+afterEach(cleanup)
 
 describe('Card', () => {
   test("snapshot test", () => {

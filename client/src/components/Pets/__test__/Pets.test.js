@@ -1,4 +1,4 @@
-import {screen, render, within} from '@testing-library/react';
+import { screen, render, within, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Pets from '../Pets';
 import { rest } from 'msw';
@@ -16,7 +16,10 @@ const server = setupServer(
 
 beforeAll(() => server.listen());
 afterAll(() => server.close());
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  cleanup();
+  server.resetHandlers();
+});
 
 describe("Pets", () => {
   // render
