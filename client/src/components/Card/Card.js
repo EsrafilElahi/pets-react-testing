@@ -5,7 +5,7 @@ import { PetsContext } from "../Pets/Pets";
 import "./Card.css";
 
 
-const Card = ({ name, phone, email, image, favoured, index }) => {
+const Card = ({ name, phone, email, image, favoured, gender, index }) => {
   const { cats, setCats } = useContext(PetsContext);
   const [isFavoured, setIsFavoured] = useState(favoured);
 
@@ -36,6 +36,7 @@ const Card = ({ name, phone, email, image, favoured, index }) => {
         <h3>{name}</h3>
         <p>{phone}</p>
         <p>{email}</p>
+        <p>{gender}</p>
       </div>
     </article>
   );

@@ -17,6 +17,7 @@ const Cards = () => {
             phone={cat.phone}
             email={cat.email}
             image={cat.image}
+            gender={cat.gender}
             favoured={cat.favoured}
             index={index}
           />
