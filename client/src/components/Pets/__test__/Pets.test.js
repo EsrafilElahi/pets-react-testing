@@ -22,6 +22,11 @@ describe("Pets", () => {
   // render
   beforeEach(() => render(<Pets />));
 
+  test("snapshot test", () => {
+    const {asFragment} = render(<Pets />);
+    expect(asFragment()).toMatchSnapshot()
+  })
+
   test('cats init', async () => {
     // find elements
     const cats = await screen.findAllByRole("article");

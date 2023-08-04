@@ -1,4 +1,4 @@
-import {screen, render} from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Filters from '../Filter';
 
@@ -7,27 +7,32 @@ describe("Filter", () => {
   // render
   beforeEach(() => {
     render(<Filters filters={{}} setFilters={() => { }} />);
-  }) 
+  });
 
-    test("should be able change value of fouvorite select", () => {
-        // find element
-      const favouriteSelect = screen.getByLabelText(/favourite/i);
-      
-      // assertion any
-      expect(favouriteSelect).toHaveValue('any');
+  test("snapshot test", () => {
+    const { asFragment } = render(<Filters filters={{}} setFilters={() => { }} />);
+    expect(asFragment()).toMatchSnapshot();
+  })
 
-      // change favoured
-      userEvent.selectOptions(favouriteSelect, "favoured");
+  test("should be able change value of fouvorite select", () => {
+    // find element
+    const favouriteSelect = screen.getByLabelText(/favourite/i);
 
-      // assertion favoured
-      expect(favouriteSelect).toHaveValue('favoured');
-      
-      // change not favoured
-      userEvent.selectOptions(favouriteSelect, "not favoured");
-      
-      // assertion not favoured
-      expect(favouriteSelect).toHaveValue('not favoured');
-    });
+    // assertion any
+    expect(favouriteSelect).toHaveValue('any');
+
+    // change favoured
+    userEvent.selectOptions(favouriteSelect, "favoured");
+
+    // assertion favoured
+    expect(favouriteSelect).toHaveValue('favoured');
+
+    // change not favoured
+    userEvent.selectOptions(favouriteSelect, "not favoured");
+
+    // assertion not favoured
+    expect(favouriteSelect).toHaveValue('not favoured');
+  });
 
   test("should be able change value of gender select", () => {
     // find element
@@ -41,7 +46,7 @@ describe("Filter", () => {
 
     // assertion male
     expect(genderSelect).toHaveValue("male");
-    
+
     // change female
     userEvent.selectOptions(genderSelect, "female");
 

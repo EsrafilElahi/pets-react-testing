@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card displays card details snapshot test 1`] = `
+<DocumentFragment>
+  <article
+    class="card"
+  >
+    <div
+      class="card-header"
+    >
+      <img
+        alt="cute cat"
+        class="card-img"
+        src="https://images.unsplash.com/photo-1548247416-ec66f4900b2e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1000&q=60"
+      />
+      <button
+        class="heart"
+      >
+        <img
+          alt="outlined heart"
+          src="heartOutlined.svg"
+        />
+      </button>
+    </div>
+    <div
+      class="card-content"
+    >
+      <h3>
+        Sydney
+      </h3>
+      <p>
+        111-111-1111
+      </p>
+      <p>
+        laith@hotmail.com
+      </p>
+      <p />
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Card like, dislike status snapshot test 1`] = `
+<DocumentFragment>
+  <article
+    class="card"
+  >
+    <div
+      class="card-header"
+    >
+      <img
+        alt="cute cat"
+        class="card-img"
+        src="https://images.unsplash.com/photo-1548247416-ec66f4900b2e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1000&q=60"
+      />
+      <button
+        class="heart"
+      >
+        <img
+          alt="outlined heart"
+          src="heartOutlined.svg"
+        />
+      </button>
+    </div>
+    <div
+      class="card-content"
+    >
+      <h3>
+        Sydney
+      </h3>
+      <p>
+        111-111-1111
+      </p>
+      <p>
+        laith@hotmail.com
+      </p>
+      <p />
+    </div>
+  </article>
+</DocumentFragment>
+`;
+
+exports[`Card snapshot test 1`] = `
+<DocumentFragment>
+  <article
+    class="card"
+  >
+    <div
+      class="card-header"
+    >
+      <img
+        alt="cute cat"
+        class="card-img"
+        src="https://images.unsplash.com/photo-1548247416-ec66f4900b2e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1000&q=60"
+      />
+      <button
+        class="heart"
+      >
+        <img
+          alt="outlined heart"
+          src="heartOutlined.svg"
+        />
+      </button>
+    </div>
+    <div
+      class="card-content"
+    >
+      <h3>
+        Sydney
+      </h3>
+      <p>
+        111-111-1111
+      </p>
+      <p>
+        laith@hotmail.com
+      </p>
+      <p />
+    </div>
+  </article>
+</DocumentFragment>
+`;

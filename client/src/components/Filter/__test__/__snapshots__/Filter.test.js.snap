@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter snapshot test 1`] = `
+<DocumentFragment>
+  <div
+    class="pet-filter-container"
+  >
+    <div
+      class="filter-container"
+    >
+      <label
+        for="favourite"
+      >
+        Favourite
+      </label>
+      <select
+        class="form-select"
+        id="favourite"
+        name="favourite"
+      >
+        <option
+          value="any"
+        >
+          Any
+        </option>
+        <option
+          value="favoured"
+        >
+          Favoured
+        </option>
+        <option
+          value="not favoured"
+        >
+          Not Favoured
+        </option>
+      </select>
+    </div>
+    <div
+      class="filter-container"
+    >
+      <label
+        for="gender"
+      >
+        Gender
+      </label>
+      <select
+        class="form-select"
+        id="gender"
+        name="gender"
+      >
+        <option
+          value="any"
+        >
+          Any
+        </option>
+        <option
+          value="male"
+        >
+          Male
+        </option>
+        <option
+          value="female"
+        >
+          Female
+        </option>
+      </select>
+    </div>
+  </div>
+</DocumentFragment>
+`;

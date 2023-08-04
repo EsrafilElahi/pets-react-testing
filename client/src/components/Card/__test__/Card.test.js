@@ -32,6 +32,19 @@ const renderCardComponentWithProvider = (props) => {
 };
 
 describe('Card', () => {
+  test("snapshot test", () => {
+    const { asFragment } = render(
+      <PetsContext.Provider
+        value={{
+          cats: cats,
+          setCats: () => { }
+        }}
+      >
+        <Card {...cardProps} />
+      </PetsContext.Provider>
+    );;
+    expect(asFragment()).toMatchSnapshot();
+  });
 
   describe("displays card details", () => {
     beforeEach(() => {
@@ -106,8 +119,7 @@ describe('Card', () => {
 
       expect(outlinedHeart2).toBeInTheDocument();
       expect(filledHeart2).not.toBeInTheDocument();
-    })
-
+    });
   });
 
 })
