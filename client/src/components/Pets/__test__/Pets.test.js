@@ -32,7 +32,7 @@ describe("Pets", () => {
   });
 
   describe("favour filter", () => {
-    describe('favour filter', () => { 
+    describe('favoured select', () => { 
       test('compare cats after select favoured', async () => {
         // before
         const beforeCats = await screen.findAllByRole("article");
@@ -47,8 +47,53 @@ describe("Pets", () => {
         const afterCats = await screen.findAllByRole("article"); 
 
         // assertion
-        expect(beforeCats).not.toStrictEqual(afterCats);
-      })
+        expect(beforeCats).not.toStrictEqual([afterCats]);
+        // expect(beforeCats).not.toBe(afterCats); // this is work too
+      });
+      test("select favoured and exactly those cats", async () => {
+        // before
+        const beforeCats = await screen.findAllByRole("article");
+
+        // click favoured
+        const favourBtn1 = within(beforeCats[0]).getByRole("button");
+        const favourBtn2 = within(beforeCats[3]).getByRole("button");
+        userEvent.click(favourBtn1);
+        userEvent.click(favourBtn2);
+
+        // select favoured
+        const favouriteOptions = screen.getByLabelText(/favourite/i);
+        userEvent.selectOptions(favouriteOptions, "favoured");
+
+        // after
+        const afterCats = await screen.findAllByRole("article");
+
+        // assertion
+        expect(afterCats).toStrictEqual([beforeCats[0], beforeCats[3]])
+      });
+    });
+
+    describe("not favoured select", () => {
+      test("select not favoured and exactly those cats not display", async () => {
+        // before
+        const beforeCats = await screen.findAllByRole("article");
+
+        // click favoured
+        const favourBtn1 = within(beforeCats[1]).getByRole("button");
+        const favourBtn2 = within(beforeCats[4]).getByRole("button");
+        userEvent.click(favourBtn1);
+        userEvent.click(favourBtn2);
+
+        // select favoured
+        const favouriteOptions = screen.getByLabelText(/favourite/i);
+        userEvent.selectOptions(favouriteOptions, "not favoured");
+
+        // after
+        const afterCats = await screen.findAllByRole("article");
+
+        // assertion
+        expect(afterCats).not.toStrictEqual([beforeCats[1], beforeCats[4]]);
+        expect(afterCats).toStrictEqual([beforeCats[0], beforeCats[2], beforeCats[3]]);
+      });    
     })
   });
 
