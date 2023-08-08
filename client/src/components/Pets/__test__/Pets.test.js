@@ -1,9 +1,10 @@
-import { screen, render, within, cleanup } from '@testing-library/react';
+import { screen, render, within, cleanup, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Pets from '../Pets';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import catsMock from '../../../mocks/cats.json';
+import axios from 'axios';
 
 const server = setupServer(
   rest.get("http://localhost:4000/cats", (req, res, ctx) => {
@@ -12,7 +13,32 @@ const server = setupServer(
       ctx.json(catsMock)
     )
   })
-)
+);
+
+
+jest.mock('axios');
+
+const fakeUsers = [{
+  "id": 1,
+  "name": "Test User 1",
+  "username": "testuser1",
+}, {
+  "id": 2,
+  "name": "Test User 2",
+  "username": "testuser2",
+}];
+
+describe('App component', () => {
+
+  test('it displays a row for each user', async () => {
+    axios.get.mockResolvedValue({ data: fakeUsers });
+    render(<Pets />);
+
+
+    const userList = await waitFor(() => screen.findAllByTestId('user-item'));
+    expect(userList).toHaveLength(2);
+  });
+});
 
 beforeAll(() => server.listen());
 afterAll(() => server.close());
