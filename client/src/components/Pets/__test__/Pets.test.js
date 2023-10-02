@@ -1,41 +1,38 @@
-import { screen, render, within, cleanup, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import Pets from '../Pets';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import catsMock from '../../../mocks/cats.json';
-import axios from 'axios';
+import { screen, render, within, cleanup, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import Pets from "../Pets";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+import catsMock from "../../../mocks/cats.json";
+import axios from "axios";
 
 const server = setupServer(
   rest.get("http://localhost:4000/cats", (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json(catsMock)
-    )
+    return res(ctx.status(200), ctx.json(catsMock));
   })
 );
 
+jest.mock("axios");
 
-jest.mock('axios');
+const fakeUsers = [
+  {
+    id: 1,
+    name: "Test User 1",
+    username: "testuser1",
+  },
+  {
+    id: 2,
+    name: "Test User 2",
+    username: "testuser2",
+  },
+];
 
-const fakeUsers = [{
-  "id": 1,
-  "name": "Test User 1",
-  "username": "testuser1",
-}, {
-  "id": 2,
-  "name": "Test User 2",
-  "username": "testuser2",
-}];
-
-describe('App component', () => {
-
-  test('it displays a row for each user', async () => {
+describe("App component", () => {
+  test("it displays a row for each user", async () => {
     axios.get.mockResolvedValue({ data: fakeUsers });
     render(<Pets />);
 
-
-    const userList = await waitFor(() => screen.findAllByTestId('user-item'));
+    const userList = await waitFor(() => screen.findAllByTestId("user-item"));
     expect(userList).toHaveLength(2);
   });
 });
@@ -52,22 +49,21 @@ describe("Pets", () => {
   beforeEach(() => render(<Pets />));
 
   test("snapshot test", () => {
-    const {asFragment} = render(<Pets />);
-    expect(asFragment()).toMatchSnapshot()
-  })
+    const { asFragment } = render(<Pets />);
+    expect(asFragment()).toMatchSnapshot();
+  });
 
-  test('cats init', async () => {
+  test("cats init", async () => {
     // find elements
     const cats = await screen.findAllByRole("article");
 
     // assertion
-    expect(cats).toHaveLength(5)
-
+    expect(cats).toHaveLength(5);
   });
 
   describe("favour filter", () => {
-    describe('favoured select', () => { 
-      test('compare cats after select favoured', async () => {
+    describe("favoured select", () => {
+      test("compare cats after select favoured", async () => {
         // before
         const beforeCats = await screen.findAllByRole("article");
 
@@ -78,7 +74,7 @@ describe("Pets", () => {
         userEvent.click(favourBtn2);
 
         // after
-        const afterCats = await screen.findAllByRole("article"); 
+        const afterCats = await screen.findAllByRole("article");
 
         // assertion
         expect(beforeCats).not.toStrictEqual([afterCats]);
@@ -102,7 +98,7 @@ describe("Pets", () => {
         const afterCats = await screen.findAllByRole("article");
 
         // assertion
-        expect(afterCats).toStrictEqual([beforeCats[0], beforeCats[3]])
+        expect(afterCats).toStrictEqual([beforeCats[0], beforeCats[3]]);
       });
     });
 
@@ -127,14 +123,18 @@ describe("Pets", () => {
         // assertion
         expect(afterCats).not.toStrictEqual([beforeCats[1], beforeCats[4]]);
         expect(afterCats).not.toStrictEqual([beforeCats]);
-        expect(afterCats).toStrictEqual([beforeCats[0], beforeCats[2], beforeCats[3]]);
-      });    
-    })
+        expect(afterCats).toStrictEqual([
+          beforeCats[0],
+          beforeCats[2],
+          beforeCats[3],
+        ]);
+      });
+    });
   });
 
-  describe('gender filter', () => {
+  describe("gender filter", () => {
     describe("male filter", () => {
-      test('compare before after select male option', async () => {
+      test("compare before after select male option", async () => {
         // before
         const beforeCards = await screen.findAllByRole("article");
 
@@ -149,10 +149,9 @@ describe("Pets", () => {
         expect(afterCards.length).toBeGreaterThan(0); // Ensure there are some male cats
         expect(afterCards.length).toBeLessThanOrEqual(beforeCards.length); // Filtered count <= Total count
 
-        afterCards.forEach(card => {
-          expect(card).toHaveTextContent(/male/i)
-        })
-
+        afterCards.forEach((card) => {
+          expect(card).toHaveTextContent(/male/i);
+        });
       });
       test("display male cards in page", async () => {
         // before
@@ -166,12 +165,11 @@ describe("Pets", () => {
         const afterCards = screen.getAllByRole("article");
 
         // assertion
-        expect(afterCards).toStrictEqual([beforeCards[1], beforeCards[3]])
-
-      })
+        expect(afterCards).toStrictEqual([beforeCards[1], beforeCards[3]]);
+      });
     });
 
-    describe('female filter', () => {
+    describe("female filter", () => {
       test("compare before after select female option", async () => {
         // before
         const beforeCards = await screen.findAllByRole("article");
@@ -187,9 +185,9 @@ describe("Pets", () => {
         expect(afterCards.length).toBeGreaterThan(0); // Ensure there are some male cats
         expect(afterCards.length).toBeLessThanOrEqual(beforeCards.length); // Filtered count <= Total count
 
-        afterCards.forEach(card => {
-          expect(card).toHaveTextContent(/female/i)
-        })
+        afterCards.forEach((card) => {
+          expect(card).toHaveTextContent(/female/i);
+        });
       });
       test("display female cards in page", async () => {
         // before
@@ -203,10 +201,12 @@ describe("Pets", () => {
         const afterCards = await screen.findAllByRole("article");
 
         // assertion
-        expect(afterCards).toStrictEqual([beforeCards[0], beforeCards[2], beforeCards[4]]);
-      })
-
-    })
+        expect(afterCards).toStrictEqual([
+          beforeCards[0],
+          beforeCards[2],
+          beforeCards[4],
+        ]);
+      });
+    });
   });
-
-})
+});
